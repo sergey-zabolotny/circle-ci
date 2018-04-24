@@ -5,3 +5,4 @@ jobs:
       - image: ansible/ubuntu14.04-ansible
     steps:
       - checkout
+      - run: git clone git@github.com:propeoplemd/mvtp.git
