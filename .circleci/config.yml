@@ -2,6 +2,6 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ansible/ansible
+      - image: ansible/ubuntu14.04-ansible
     steps:
       - checkout
