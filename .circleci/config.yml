@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ansible/ubuntu14.04-ansible
+      - image: debian:stretch
     steps:
       - checkout
-      - run: git clone git@github.com:propeoplemd/mvtp.git
