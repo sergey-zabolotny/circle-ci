@@ -2,6 +2,6 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docksal/ci-agent:1.2-php
+      - image: debian:stretch
     steps:
       - checkout
