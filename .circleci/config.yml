@@ -1,7 +1,25 @@
+init: &init
+  docker:
+    - image: docksal/ci-agent:1.2-php
+  working_directory: ~/build
+
+run-sandbox: &run-sandbox
+  name: Sandbox provisioning
+  command: |
+    env
+
+
 version: 2
 jobs:
-  build:
-    docker:
-      - image: debian:stretch
+  sandbox:
+    <<: *init
     steps:
       - checkout
+      - run:
+          <<: *run-sandbox
+
+workflows:
+  version: 2
+  default-workflow:
+    jobs:
+      - sandbox:
