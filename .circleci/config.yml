@@ -5,23 +5,19 @@ init: &init
   environment:
       BASH_ENV: /home/agent/.bashrc
 
-run-envvars: &run-envvars
-  name: Configuring build environment
-  command: |
-    env
-
 run-sandbox: &run-sandbox
   name: Sandbox provisioning
   command: |
-    env
+    export DOMAIN=`echo $DOMAIN | tr "[:upper:]" "[:lower:]"`
+    echo 'DOMAIN='"$DOMAIN" >> $BASH_ENV
+    build-init
+    ssh docker-host "cd $REMOTE_BUILD_DIR && fin init"
 
 version: 2
 jobs:
   sandbox:
     <<: *init
     steps:
-      - run:
-          <<: *run-envvars
       - checkout
       - run:
           <<: *run-sandbox
@@ -31,3 +27,10 @@ workflows:
   default-workflow:
     jobs:
       - sandbox:
+          # Load org level environment variables from CircleCI
+          context: org-global
+          filters:
+            branches:
+              ignore:
+                - production
+                - staging
