@@ -27,10 +27,3 @@ workflows:
   default-workflow:
     jobs:
       - sandbox:
-          # Load org level environment variables from CircleCI
-          context: org-global
-          filters:
-            branches:
-              ignore:
-                - production
-                - staging
