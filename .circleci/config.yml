@@ -8,7 +8,6 @@ run-sandbox: &run-sandbox
   command: |
     env
 
-
 version: 2
 jobs:
   sandbox:
