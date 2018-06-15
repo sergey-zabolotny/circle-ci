@@ -2,6 +2,13 @@ init: &init
   docker:
     - image: docksal/ci-agent:1.2-php
   working_directory: ~/build
+  environment:
+      BASH_ENV: /home/agent/.bashrc
+
+run-envvars: &run-envvars
+  name: Configuring build environment
+  command: |
+    env
 
 run-sandbox: &run-sandbox
   name: Sandbox provisioning
@@ -13,6 +20,8 @@ jobs:
   sandbox:
     <<: *init
     steps:
+      - run:
+          <<: *run-envvars
       - checkout
       - run:
           <<: *run-sandbox
