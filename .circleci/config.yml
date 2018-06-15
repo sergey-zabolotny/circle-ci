@@ -8,10 +8,7 @@ init: &init
 run-sandbox: &run-sandbox
   name: Sandbox provisioning
   command: |
-    export DOMAIN=`echo $DOMAIN | tr "[:upper:]" "[:lower:]"`
-    echo 'DOMAIN='"$DOMAIN" >> $BASH_ENV
-    build-init
-    ssh docker-host "cd $REMOTE_BUILD_DIR && fin init"
+    env
 
 version: 2
 jobs:
