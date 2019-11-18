@@ -8,4 +8,7 @@ jobs:
     steps:
       - run:
           name: Configure agent environment
-          command: echo 'source build-env' >> $BASH_ENV
+          command: |
+                   echo 'source build-env' >> $BASH_ENV
+                   source build-env
+      - checkout
