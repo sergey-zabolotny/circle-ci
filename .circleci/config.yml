@@ -1,26 +1,12 @@
-init: &init
-  docker:
-    - image: docksal/ci-agent:1.2-php
-  working_directory: ~/build
-  environment:
-      BASH_ENV: /home/agent/.bashrc
-
-run-sandbox: &run-sandbox
-  name: Sandbox provisioning
-  command: |
-    env
-
 version: 2
-jobs:
-  sandbox:
-    <<: *init
-    steps:
-      - checkout
-      - run:
-          <<: *run-sandbox
 
-workflows:
-  version: 2
-  default-workflow:
-    jobs:
-      - sandbox
+jobs:
+  build:
+    working_directory: /home/agent/build
+    docker:
+      - image: docksal/ci-agent:edge-php
+    steps:
+      - run:
+          name: Configure agent environment
+          command: echo 'source build-env' >> $BASH_ENV
+      - checkout
