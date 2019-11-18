@@ -9,4 +9,3 @@ jobs:
       - run:
           name: Configure agent environment
           command: echo 'source build-env' >> $BASH_ENV
-      - checkout
